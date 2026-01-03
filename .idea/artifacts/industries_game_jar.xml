@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="industries_game:jar">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="industries_game.jar">
+      <element id="module-output" name="registries" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/it/unimi/dsi/fastutil/8.5.12/fastutil-8.5.12.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
