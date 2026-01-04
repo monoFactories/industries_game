@@ -8,7 +8,7 @@ import java.util.Set;
 
 public interface Registry<T> extends Iterable<T> {
     T get(Identifier id);
-    void register(Identifier id, T item) throws IllegalArgumentException;
+    Identifier register(Identifier id, T item);
     boolean contains(Identifier id);
     boolean remove(Identifier id);
     int size();

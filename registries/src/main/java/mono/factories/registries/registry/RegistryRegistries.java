@@ -8,5 +8,10 @@ import mono.factories.registries.id.Identifier;
 import java.util.concurrent.ConcurrentMap;
 
 public class RegistryRegistries {
-    public static final Object2ObjectMap<Identifier, Registry<?>> root = Object2ObjectMaps.synchronize(new Object2ObjectOpenHashMap<>());
+    public static final Registry<Registry<?>> root = new StandardRegistry<>();
+
+    public static <T> Registry<T> register(Registry<T> registry, Identifier id) {
+        root.register(id, registry);
+        return registry;
+    }
 }

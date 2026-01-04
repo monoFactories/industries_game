@@ -18,8 +18,9 @@ public class StandardRegistry<T> implements Registry<T> {
     }
 
     @Override
-    public void register(Identifier id, T item) throws IllegalArgumentException {
+    public Identifier register(Identifier id, T item) {
         map.put(id, item);
+        return id;
     }
 
     @Override

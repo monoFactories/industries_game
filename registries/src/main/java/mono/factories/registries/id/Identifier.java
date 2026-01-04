@@ -1,7 +1,7 @@
 package mono.factories.registries.id;
 
 public final class Identifier implements Cloneable {
-    public static final String STANDARD_SPACE = "industries";
+    public static final String STANDARD_SPACE = "root_mod";
     public static final char STANDARD_SEPARATION_CHARACTER = ':';
 
     private final String space;
@@ -11,13 +11,16 @@ public final class Identifier implements Cloneable {
         this.name = name;
         this.space = space;
     }
+
     public Identifier(String space, String name) {
         this((name), (space), false);
     }
+
     private Identifier(String[] a) {
         this(a[0], a[1]);
     }
-    public Identifier (String id) {
+
+    public Identifier(String id) {
         this(parser(id, STANDARD_SEPARATION_CHARACTER));
     }
 
@@ -52,8 +55,8 @@ public final class Identifier implements Cloneable {
         return space + STANDARD_SEPARATION_CHARACTER + name;
     }
 
-    private static String[] parser (String line, char separator) {
-        String[] complete = new String[] {STANDARD_SPACE, line};
+    private static String[] parser(String line, char separator) {
+        String[] complete = new String[]{STANDARD_SPACE, line};
         int number = line.indexOf(separator);
         if (number >= 0) {
             complete[1] = line.substring(number + 1);

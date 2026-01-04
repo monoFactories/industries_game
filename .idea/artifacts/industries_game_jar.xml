@@ -2,8 +2,21 @@
   <artifact type="jar" name="industries_game:jar">
     <output-path>$USER_HOME$/Desktop</output-path>
     <root id="archive" name="industries_game.jar">
-      <element id="module-output" name="registries" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-media:win:25.0.1" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/it/unimi/dsi/fastutil/8.5.12/fastutil-8.5.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.11.0/gson-2.11.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/25.0.1/javafx-base-25.0.1-win.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:25.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:25.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:25.0.1" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/25.0.1/javafx-graphics-25.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/25.0.1/javafx-graphics-25.0.1-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/errorprone/error_prone_annotations/2.27.0/error_prone_annotations-2.27.0.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-media:25.0.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:25.0.1" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/25.0.1/javafx-base-25.0.1.jar" path-in-jar="/" />
+      <element id="module-output" name="interfaceFx" />
+      <element id="module-output" name="registries" />
     </root>
   </artifact>
 </component>
