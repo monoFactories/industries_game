@@ -1,27 +1,33 @@
 package mono.factories.registries.id;
 
-public final class Identifier implements Cloneable {
+import com.google.gson.*;
+
+import java.lang.reflect.Type;
+
+public final class Identifier implements Cloneable { // constructors-public: (String), (String, String)
+    private static final Gson g = new GsonBuilder().registerTypeAdapter(Identifier.class, new IdentifierJson()).create();
     public static final String STANDARD_SPACE = "root_mod";
     public static final char STANDARD_SEPARATION_CHARACTER = ':';
 
     private final String space;
     private final String name;
 
-    private Identifier(String name, String space, boolean notUsingVariable) {
-        this.name = name;
-        this.space = space;
-    }
-
     public Identifier(String space, String name) {
-        this((name), (space), false);
+        if (space == null || name == null) throw new NullPointerException("“One of the parameters is null”");
+        this.space = space;
+        this.name = name;
     }
 
-    private Identifier(String[] a) {
-        this(a[0], a[1]);
+    private Identifier(String[] parts) {
+        this(parts[0], parts[1]);
+    }
+
+    private Identifier(String id, char separator, String standardSpace) {
+        this(parser(id, separator, standardSpace));
     }
 
     public Identifier(String id) {
-        this(parser(id, STANDARD_SEPARATION_CHARACTER));
+        this(id, STANDARD_SEPARATION_CHARACTER, STANDARD_SPACE);
     }
 
     public String getName() {
@@ -55,8 +61,8 @@ public final class Identifier implements Cloneable {
         return space + STANDARD_SEPARATION_CHARACTER + name;
     }
 
-    private static String[] parser(String line, char separator) {
-        String[] complete = new String[]{STANDARD_SPACE, line};
+    private static String[] parser(String line, char separator, String space) {
+        String[] complete = new String[]{space, line};
         int number = line.indexOf(separator);
         if (number >= 0) {
             complete[1] = line.substring(number + 1);
@@ -65,5 +71,43 @@ public final class Identifier implements Cloneable {
             }
         }
         return complete;
+    }
+
+    public static Identifier create(String id, String customStandardSpace) {
+        return new Identifier(id, STANDARD_SEPARATION_CHARACTER, customStandardSpace);
+    }
+
+    public static Identifier read(JsonElement je) {
+        if (je != null) {
+
+        }
+        return null;
+    }
+    private final static class IdentifierJson implements JsonSerializer<Identifier>, JsonDeserializer<Identifier> {
+
+        @Override
+        public Identifier deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            if (jsonElement.isJsonArray()) {
+                JsonArray ja = jsonElement.getAsJsonArray();
+                int s = ja.size();
+                if (s >= 2) {
+                    return new Identifier(ja.get(0).getAsString(), ja.get(1).getAsString());
+                } else if (s == 1) {
+                    return new Identifier(ja.get(0).getAsString());
+                }
+            } else if (jsonElement.isJsonPrimitive()) {
+                JsonPrimitive jp = jsonElement.getAsJsonPrimitive();
+                if (jp.isString()) {
+                    String str = jp.getAsString();
+                    return new Identifier(str);
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public JsonElement serialize(Identifier identifier, Type type, JsonSerializationContext jsonSerializationContext) {
+            return new JsonPrimitive(identifier.space + identifier.name);
+        }
     }
 }

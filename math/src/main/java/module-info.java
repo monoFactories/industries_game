@@ -1,0 +1,3 @@
+module math {
+    requires registries;
+}
