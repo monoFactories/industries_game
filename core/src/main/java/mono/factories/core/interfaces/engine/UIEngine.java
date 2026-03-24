@@ -25,7 +25,7 @@ public final class UIEngine extends Process {
     final ComparisonsMap comparisons = new ComparisonsMap();
     final List<Consumer<UIEngine>> actions = new ObjectArrayList<>();
     final Object actionLock = new Object();
-    private final Pane rootPane;
+    final Pane rootPane;
 
     private UIEngine(Stage stage) {
         super(new Identifier("ui_engine"), new Identifier[0]);
