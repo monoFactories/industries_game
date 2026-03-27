@@ -2,6 +2,7 @@ package mono.factories.registries.registry;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import mono.factories.registries.id.Identifier;
 import mono.factories.registries.storage.Storage2;
 
@@ -56,5 +57,9 @@ public class ListRegistryImpl <T> implements ListRegistry<T> {
     @Override
     public Iterator<Collection<T>> iterator() {
         return map.values().iterator();
+    }
+
+    public static <T> Collection<T> getCollectionInstance() {
+        return new ObjectArrayList<>();
     }
 }
