@@ -1,11 +1,14 @@
 package mono.factories.core.interfaces.engine;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mono.factories.core.registry.RegistryContainer;
 import mono.factories.interfacefx.components.Component;
 import mono.factories.registries.id.Identifier;
+import mono.factories.registries.registry.ListRegistryImpl;
 
-import java.util.Iterator;
+import java.util.Collection;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class UIController {
@@ -16,38 +19,72 @@ public class UIController {
         UIController.engine = engine;
     }
 
+    public static void moveTo(Identifier target, Identifier parent) {
+        baseAdd(target, parent, true);
+    }
+
     public static void addComponent(Identifier addedID, Identifier parent) {
         baseAdd(addedID, parent, false);
     }
 
     private static void baseAdd(Identifier addedID, Identifier parent, boolean moveTo) {
-        consumer((ui) -> {
+        consumer(ui -> {
+            List<Component> active = ui.active;
             Component addedC = RegistryContainer.UI_COMPONENTS.a().get(addedID);
-            if (addedC != null && !ui.active.contains(addedC)) {
-                ComparisonsMap cm = ui.comparisons;
-                ui.active.add(addedC);
-                ui.rootPane.getChildren().add(addedC.getPane());
-                cm.childToParent.put(addedID, parent);
-                cm.parentToChildren.get(parent).add(addedID);
-                ObjectArrayList<Identifier> needRemove = new ObjectArrayList<>();
-                // починить чтобы не было зацикливания
-                needRemove.addAll(cm.parentToChildren.get(addedID));// A -> B, B -> A
-                while (!needRemove.isEmpty()) {
-                    ObjectArrayList<Identifier> tempAdd = new ObjectArrayList<>();
-                    for (Identifier id : needRemove) {
-                        tempAdd.addAll(cm.parentToChildren.get(id));
-                        Component c = RegistryContainer.UI_COMPONENTS.a().get(id);
-                        if (c != null) {
-                            ui.active.remove(c);
-                            cm.childToParent.remove(id);
-                            cm.parentToChildren.remove(id);
-                        }
-                    }
-                    needRemove.clear();
-                    needRemove.addAll(tempAdd);
+            boolean isRoot = active.isEmpty();
+            addComponent0(addedC, parent, ui, isRoot);
+            if (moveTo) {
+                Component parentC = RegistryContainer.UI_COMPONENTS.a().get(parent);
+                if (parentC != null) {
+                    ui.rootPane.getChildren().remove(parentC.getPane());
+                    active.remove(parentC);
                 }
             }
         });
+    }
+
+    private static void addComponent0(Component c, Identifier parent, UIEngine ui, boolean isRoot) {
+        ui.active.add(c);
+        ui.rootPane.getChildren().add(c.getPane());
+        ui.comparisons.parentToChildren.register(c.id(), ListRegistryImpl.getCollectionInstance());
+        if (isRoot) {
+            ui.comparisons.rootComponent = c.id();
+        } else {
+            ui.comparisons.childToParent.put(c.id(), parent);
+        }
+        Collection<Identifier> children = getAllChildren(ui, parent);
+        children.forEach(child -> {
+            ui.comparisons.childToParent.remove(child);
+            ui.comparisons.parentToChildren.remove(child);
+        });
+    }
+
+    private static Collection<Identifier> getAllChildren(UIEngine ui, Identifier parentID) {
+        ComparisonsMap cm = ui.comparisons;
+        ObjectOpenHashSet<Identifier> needReturn = new ObjectOpenHashSet<>();
+        ObjectArrayList<Identifier> queue = new ObjectArrayList<>();
+        Collection<Identifier> directChildren = cm.parentToChildren.get(parentID);
+        if (directChildren != null) {
+            queue.addAll(directChildren);
+        }
+        while (!queue.isEmpty()) {
+            ObjectArrayList<Identifier> currentLevel = new ObjectArrayList<>();
+            for (Identifier id : queue) {
+                if (!needReturn.contains(id)) {
+                    needReturn.add(id);
+                    Collection<Identifier> children = cm.parentToChildren.get(id);
+                    if (children != null) {
+                        for (Identifier child : children) {
+                            if (!needReturn.contains(child)) {
+                                currentLevel.add(child);
+                            }
+                        }
+                    }
+                }
+            }
+            queue = currentLevel;
+        }
+        return needReturn;
     }
 
     private static void checkEngine() {
@@ -61,5 +98,3 @@ public class UIController {
         }
     }
 }
-
-

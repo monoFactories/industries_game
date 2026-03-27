@@ -8,4 +8,5 @@ import mono.factories.registries.registry.ListRegistryImpl;
 class ComparisonsMap {
     final Object2ObjectMap<Identifier, Identifier> childToParent = new Object2ObjectOpenHashMap<>();
     final ListRegistryImpl<Identifier> parentToChildren = new ListRegistryImpl<>();
+    Identifier rootComponent;
 }
