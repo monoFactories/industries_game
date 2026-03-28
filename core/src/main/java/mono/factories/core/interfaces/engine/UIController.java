@@ -10,6 +10,10 @@ import mono.factories.registries.registry.ListRegistryImpl;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
+/*
+_A->B->_C:
+1. add(D, C):
+ */
 
 public class UIController {
     private static UIEngine engine;
@@ -19,6 +23,43 @@ public class UIController {
         UIController.engine = engine;
     }
 
+    public static Identifier[] getAllChildren(Identifier target) {
+        try {
+            checkEngine();
+            UIEngine ui = UIEngine.getInstance();
+            synchronized (UIEngine.class) {
+                return getAllChildren(ui, target).toArray(new Identifier[0]);
+            }
+        } catch (Exception e) {
+            return new Identifier[0];
+        }
+    }
+
+    public static void remove(Identifier target) {
+        if (target != null) {
+            consumer(ui -> {
+                Collection<Identifier> children = getAllChildren(ui, target);
+                children.forEach(child -> {
+                    ui.comparisons.childToParent.remove(child);
+                    ui.comparisons.parentToChildren.remove(child);
+                    Component component = RegistryContainer.UI_COMPONENTS.a().get(child);
+                    if (component != null) {
+                        ui.active.remove(component);
+                        ui.rootPane.getChildren().remove(component.getPane());
+                    }
+                });
+                ui.comparisons.childToParent.remove(target);
+                ui.comparisons.parentToChildren.remove(target);
+                Component component = RegistryContainer.UI_COMPONENTS.a().get(target);
+                if (component != null) {
+                    ui.active.remove(component);
+                    ui.rootPane.getChildren().remove(component.getPane());
+                }
+            });
+        }
+    }
+
+    //can be used as remove
     public static void moveTo(Identifier target, Identifier parent) {
         baseAdd(target, parent, true);
     }
@@ -56,6 +97,11 @@ public class UIController {
         children.forEach(child -> {
             ui.comparisons.childToParent.remove(child);
             ui.comparisons.parentToChildren.remove(child);
+            Component component = RegistryContainer.UI_COMPONENTS.a().get(child);
+            if (component != null) {
+                ui.active.remove(component);
+                ui.rootPane.getChildren().remove(component.getPane());
+            }
         });
     }
 

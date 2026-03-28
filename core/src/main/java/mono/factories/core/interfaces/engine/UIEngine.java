@@ -36,7 +36,7 @@ public final class UIEngine extends Process {
     }
 
     public static UIEngine init(Stage stage) {
-        if (uiEngine == null) throw new IllegalStateException("uiEngine has been init");
+        if (uiEngine != null) throw new IllegalStateException("uiEngine has been init");
         uiEngine = new UIEngine(stage);
         UIController.init(uiEngine);
         return uiEngine;
@@ -46,7 +46,7 @@ public final class UIEngine extends Process {
     public void run(Engine engine) {
         CountDownLatch cdl = new CountDownLatch(1);
         Platform.runLater(() -> {
-            synchronized (actionLock) {
+            synchronized (UIEngine.class) {
                 actions.forEach(r -> r.accept(this));
                 actions.clear();
             }
