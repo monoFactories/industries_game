@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 public class Core extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        EngineInit.init();
 
     }
 

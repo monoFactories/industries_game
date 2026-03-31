@@ -5,7 +5,6 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import mono.factories.core.registry.RegistryContainer;
 import mono.factories.interfacefx.components.Component;
 import mono.factories.registries.id.Identifier;
-import mono.factories.registries.registry.ListRegistryImpl;
 
 import java.util.Collection;
 import java.util.List;
@@ -85,31 +84,29 @@ public class UIController {
     }
 
     private static void addComponent0(Component c, Identifier parent, UIEngine ui, boolean isRoot) {
-        ui.active.add(c);
-        ui.rootPane.getChildren().add(c.getPane());
-        ui.comparisons.parentToChildren.register(c.id(), ListRegistryImpl.getCollectionInstance());
+        add_(ui, c);
         if (isRoot) {
             ui.comparisons.rootComponent = c.id();
         } else {
             ui.comparisons.childToParent.put(c.id(), parent);
+            ui.comparisons.addParentToChildrenEntry(ui, parent, c.id());
         }
-        Collection<Identifier> children = getAllChildren(ui, parent);
+        Collection<Identifier> children = getAllChildren(ui, c.id());
         children.forEach(child -> {
             ui.comparisons.childToParent.remove(child);
             ui.comparisons.parentToChildren.remove(child);
             Component component = RegistryContainer.UI_COMPONENTS.a().get(child);
             if (component != null) {
-                ui.active.remove(component);
-                ui.rootPane.getChildren().remove(component.getPane());
+                remove_(ui, component);
             }
         });
     }
 
-    private static Collection<Identifier> getAllChildren(UIEngine ui, Identifier parentID) {
+    private static Collection<Identifier> getAllChildren(UIEngine ui, Identifier targetID) {
         ComparisonsMap cm = ui.comparisons;
         ObjectOpenHashSet<Identifier> needReturn = new ObjectOpenHashSet<>();
         ObjectArrayList<Identifier> queue = new ObjectArrayList<>();
-        Collection<Identifier> directChildren = cm.parentToChildren.get(parentID);
+        Collection<Identifier> directChildren = cm.parentToChildren.get(targetID);
         if (directChildren != null) {
             queue.addAll(directChildren);
         }
@@ -133,13 +130,23 @@ public class UIController {
         return needReturn;
     }
 
+    private static void add_(UIEngine ui, Component c) {
+        ui.active.add(c);
+        ui.rootPane.getChildren().add(c.getPane());
+    }
+
+    private static void remove_(UIEngine ui, Component c) {
+        ui.active.remove(c);
+        ui.rootPane.getChildren().remove(c.getPane());
+    }
+
     private static void checkEngine() {
         if (engine == null) throw new IllegalStateException("uiEngine not initialized");
     }
 
     private static void consumer(Consumer<UIEngine> r) {
         checkEngine();
-        synchronized (engine.actionLock) {
+        synchronized (UIEngine.class) {
             engine.actions.add(r);
         }
     }

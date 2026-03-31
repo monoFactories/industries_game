@@ -6,7 +6,7 @@ import mono.factories.registries.id.Identifier;
 
 import java.util.Objects;
 
-public abstract class Component implements Identifiable {
+public class Component implements Identifiable {
     protected final Identifier id;
     protected final AnchorPane pane;
 
@@ -24,9 +24,9 @@ public abstract class Component implements Identifiable {
         return pane;
     }
 
-    public abstract void update();
-    public abstract void onAdd();
-    public abstract void onRemove();
+    public void update() {}
+    public void onAdd() {}
+    public void onRemove() {}
 
     @Override
     public boolean equals(Object object) {
