@@ -5,7 +5,7 @@ import com.google.gson.*;
 import java.lang.reflect.Type;
 
 public final class Identifier implements Cloneable { // constructors-public: (String), (String, String)
-    private static final Gson g = new GsonBuilder().registerTypeAdapter(Identifier.class, new IdentifierJson()).create();
+    public static final IdentifierJson JSON = new IdentifierJson();
     public static final String STANDARD_SPACE = "root_mod";
     public static final char STANDARD_SEPARATION_CHARACTER = ':';
 
@@ -83,7 +83,7 @@ public final class Identifier implements Cloneable { // constructors-public: (St
         }
         return null;
     }
-    private final static class IdentifierJson implements JsonSerializer<Identifier>, JsonDeserializer<Identifier> {
+    public final static class IdentifierJson implements JsonSerializer<Identifier>, JsonDeserializer<Identifier> {
 
         @Override
         public Identifier deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
@@ -107,7 +107,7 @@ public final class Identifier implements Cloneable { // constructors-public: (St
 
         @Override
         public JsonElement serialize(Identifier identifier, Type type, JsonSerializationContext jsonSerializationContext) {
-            return new JsonPrimitive(identifier.space + identifier.name);
+            return new JsonPrimitive(identifier.space + STANDARD_SEPARATION_CHARACTER + identifier.name);
         }
     }
 }

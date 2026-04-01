@@ -8,7 +8,7 @@ import mono.factories.registries.id.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class NodeParameters {
+public final class NodeParameters {
     //action: {type: [actionId, ....], ...}
     public static final Logger logger = LogManager.getLogger(NodeParameters.class);
     private final NodeParameterActions actions;
