@@ -14,6 +14,10 @@ public class Component implements Identifiable {
         this.id = id;
         this.pane = new AnchorPane();
     }
+    public Component(Identifier id, AnchorPane pane1) {
+        this.id = id;
+        this.pane = pane1 == null ? new AnchorPane() : pane1;
+    }
 
     @Override
     public final Identifier id() {
