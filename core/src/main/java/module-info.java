@@ -5,6 +5,8 @@ module core{
     requires interfaceFx;
     requires math;
     requires versioncompare;
+    requires jdk.compiler;
+    requires zt.zip;
 
     opens mono.factories.core.inital;
     opens mono.factories.core.interfaces.engine;

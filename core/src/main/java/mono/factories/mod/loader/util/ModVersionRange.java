@@ -1,4 +1,4 @@
-package mono.factories.mod.loader;
+package mono.factories.mod.loader.util;
 
 import io.github.g00fy2.versioncompare.Version;
 
