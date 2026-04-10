@@ -14,7 +14,7 @@ public class DependencyResolver<T extends HasDependency> extends StandardRegistr
     public DependencyResolver() {
     }
 
-    public List<T> resolve() {
+    public synchronized List<T> resolve() {
         if (!hasChange)
             return lastOut;
         Map<Identifier, T> objectById = new HashMap<>();
@@ -62,19 +62,19 @@ public class DependencyResolver<T extends HasDependency> extends StandardRegistr
     }
 
     @Override
-    public boolean remove(Identifier id) {
+    public synchronized boolean remove(Identifier id) {
         hasChange = true;
         return super.remove(id);
     }
 
     @Override
-    public Storage2<Identifier, T> registerStorage(Identifier id, T item) {
+    public synchronized Storage2<Identifier, T> registerStorage(Identifier id, T item) {
         hasChange = true;
         return super.registerStorage(id, item);
     }
 
     @Override
-    public Identifier register(Identifier id, T item) {
+    public synchronized Identifier register(Identifier id, T item) {
         hasChange = true;
         return super.register(id, item);
     }
