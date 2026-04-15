@@ -7,7 +7,7 @@ import mono.factories.interfacefx.nodeparameters.NodeParameterFunction;
 import mono.factories.interfacefx.registries.InterfaceRegistries;
 import mono.factories.languages.language.LanguageRegistries;
 import mono.factories.mod.Mod;
-import mono.factories.mod.ModRegistries;
+import mono.factories.mod.registries.ModRegistries;
 import mono.factories.registries.id.Identifier;
 import mono.factories.registries.registry.Registry;
 import mono.factories.registries.registry.RegistryRegistries;

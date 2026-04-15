@@ -8,14 +8,21 @@ import java.util.function.Function;
 public class ModVersionRange {
     public static final String ALWAYS_TRUE = "*";
 
+    private final String original;
     private final Function<Version, Boolean> rangeFunction;
 
-    private ModVersionRange(Function<Version, Boolean> rangeFunction) {
+    private ModVersionRange(Function<Version, Boolean> rangeFunction, String original) {
         this.rangeFunction = rangeFunction;
+        this.original = original;
     }
 
     public boolean inRange(Version v) {
         return rangeFunction.apply(v);
+    }
+
+    @Override
+    public String toString() {
+        return original;
     }
 
     public static ModVersionRange parse(String versionRange) {
@@ -46,6 +53,6 @@ public class ModVersionRange {
                 throw new IllegalArgumentException("couldn't find version operator: " + operator);
             }
         }
-        return new ModVersionRange(rangeFunction);
+        return new ModVersionRange(rangeFunction, versionRange);
     }
 }

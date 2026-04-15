@@ -1,6 +1,7 @@
-package mono.factories.mod;
+package mono.factories.mod.registries;
 
 
+import mono.factories.mod.Mod;
 import mono.factories.registries.registry.Registry;
 import mono.factories.registries.registry.StandardRegistry;
 

@@ -11,4 +11,6 @@ module core{
     opens mono.factories.core.inital;
     opens mono.factories.core.interfaces.engine;
     opens mono.factories.mod;
+    opens mono.factories.mod.registries;
+    opens mono.factories.mod.entrypoint;
 }

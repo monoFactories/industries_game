@@ -32,6 +32,7 @@ public class ModLoadingConfig implements HasDependency {
         GSON = new GsonBuilder()
                 .registerTypeAdapter(ModLoadingConfig.class, (JsonDeserializer<ModLoadingConfig>) (json, typeOfT, context) -> {
                     JsonObject o = json.getAsJsonObject();
+                    JsonArray
                     String id = o.get("id").getAsString();
                     Version version = new Version(o.get("version").getAsString(), true);
                     Object2ObjectMap<String, ModVersionRange> dependencies = new Object2ObjectOpenHashMap<>();
@@ -55,6 +56,14 @@ public class ModLoadingConfig implements HasDependency {
     @Override
     public Identifier id() {
         return new Identifier(id);
+    }
+
+    public Version getVersion() {
+        return version;
+    }
+
+    public Map<String, ModVersionRange> getDependencies() {
+        return dependencies;
     }
 }
 /*
