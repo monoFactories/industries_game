@@ -109,7 +109,7 @@ public class FilteredFolderModProvider implements ModProvider {
         public void startLoading() throws MalformedURLException {
             ModClassLoader.classLoader.addURL(jarFile.toURI().toURL());
             List<String> entryPoints = loadParameters.getEntryPoints();
-            entryPoints.forEach(entryPoint -> );
+            entryPoints.forEach(entryPoint -> {});
         }
     }
 }
