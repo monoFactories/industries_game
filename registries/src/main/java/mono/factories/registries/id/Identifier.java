@@ -5,6 +5,7 @@ import com.google.gson.*;
 import java.lang.reflect.Type;
 
 public final class Identifier implements Cloneable { // constructors-public: (String), (String, String)
+    public static final Identifier[] EMPTY_ARRAY = new Identifier[0];
     public static final IdentifierJson JSON = new IdentifierJson();
     public static final String STANDARD_SPACE = "root_mod";
     public static final char STANDARD_SEPARATION_CHARACTER = ':';
