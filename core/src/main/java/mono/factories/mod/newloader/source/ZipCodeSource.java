@@ -32,9 +32,7 @@ public class ZipCodeSource implements CodeSource, Closeable {
     @Override
     public boolean exists(String path) {
         ZipEntry entry = zipFile.getEntry(path);
-        if (entry != null) return true;
-        // Проверка директории (может не иметь явной записи)
-        return zipFile.stream().anyMatch(e -> e.getName().startsWith(path + "/"));
+        return entry != null;
     }
 
     @Override
@@ -85,5 +83,9 @@ public class ZipCodeSource implements CodeSource, Closeable {
     @Override
     public void close() throws IOException {
         zipFile.close();
+    }
+
+    public ZipFile getZipFile() {
+        return zipFile;
     }
 }
