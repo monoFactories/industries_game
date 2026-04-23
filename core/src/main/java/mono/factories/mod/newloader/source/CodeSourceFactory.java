@@ -1,5 +1,6 @@
 package mono.factories.mod.newloader.source;
 
+import mono.factories.dependencies.DependencyResolver;
 import mono.factories.registries.registry.ListRegistry;
 import mono.factories.registries.registry.ListRegistryImpl;
 

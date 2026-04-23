@@ -4,7 +4,7 @@ import mono.factories.dependencies.HasDependency;
 
 import java.nio.file.Path;
 
-public interface CodeSourceProvider extends HasDependency {
+public interface CodeSourceProvider {
     boolean supports(Path path);
     CodeSource create(Path path) throws Exception;
 }
