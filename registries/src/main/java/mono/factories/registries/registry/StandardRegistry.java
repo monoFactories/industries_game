@@ -7,6 +7,7 @@ import mono.factories.registries.id.Identifier;
 import mono.factories.registries.storage.Storage2;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 // Map<Identifier, T>
@@ -58,6 +59,11 @@ public class StandardRegistry<T> implements Registry<T> {
     @Override
     public Optional<T> getOptional(Identifier id) {
         return Optional.ofNullable(get(id));
+    }
+
+    @Override
+    public void forEach(BiConsumer<Identifier, T> action) {
+        map.forEach(action);
     }
 
     @Override

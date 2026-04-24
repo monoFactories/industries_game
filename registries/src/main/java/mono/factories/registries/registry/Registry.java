@@ -6,6 +6,8 @@ import mono.factories.registries.storage.Storage2;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
+
 // Map<Identifier, T>
 public interface Registry<T> extends Iterable<T> {
     T get(Identifier id);
@@ -25,4 +27,6 @@ public interface Registry<T> extends Iterable<T> {
     Collection<T> values();
 
     Optional<T> getOptional(Identifier id);
+
+    void forEach(BiConsumer<Identifier, T> action);
 }
