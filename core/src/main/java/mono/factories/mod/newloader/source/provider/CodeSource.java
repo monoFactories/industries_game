@@ -1,10 +1,8 @@
-package mono.factories.mod.newloader.source;
+package mono.factories.mod.newloader.source.provider;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Интерфейс для работы с источником кода как с архивом или файловой папкой.

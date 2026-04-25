@@ -1,8 +1,9 @@
 package mono.factories.mod.newloader.source;
 
+import mono.factories.mod.newloader.source.provider.CodeSource;
+
 import java.io.*;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;

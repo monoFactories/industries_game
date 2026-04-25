@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TagDependencyResolver<T extends HasTag> extends StandardRegistry<T> {
+    public static final Identifier EMPTY_DEPENDENCY = new Identifier("");
     private final Object processedLock = new Object();
     private volatile boolean needUpdate = false;
 
@@ -40,8 +41,12 @@ public class TagDependencyResolver<T extends HasTag> extends StandardRegistry<T>
     public TagResolverResult<T> resolve() {
         Map<Identifier, List<T>> map = new HashMap<>();
         forEach(hasTag -> {
-            for (Identifier dependency : hasTag.dependencies()) {
-                map.computeIfAbsent(dependency, k -> new ArrayList<>()).add(hasTag);
+            if (hasTag.dependencies().length > 0) {
+                for (Identifier dependency : hasTag.dependencies()) {
+                    map.computeIfAbsent(dependency, k -> new ArrayList<>()).add(hasTag);
+                }
+            } else {
+                map.computeIfAbsent(EMPTY_DEPENDENCY, k -> new ArrayList<>()).add(hasTag);
             }
         });
         return new TagResolverResult<>(map);

@@ -11,7 +11,10 @@ public class TagResolverResult<T extends HasTag> {
 
     public TagResolverResult(Map<Identifier, List<T>> dependencyToChildren) {
         Object2ObjectMap<Identifier, ObjectList<T>> map = new Object2ObjectOpenHashMap<>();
-        dependencyToChildren.forEach((id, list) -> map.put(id, new ObjectImmutableList<>(list)));
+        dependencyToChildren.forEach((id, list) -> {
+                    map.put(id, new ObjectImmutableList<>(list));
+                }
+            );
         this.dependencyToChildren = Object2ObjectMaps.unmodifiable(map);
     }
 
