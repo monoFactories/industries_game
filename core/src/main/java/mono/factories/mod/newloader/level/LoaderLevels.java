@@ -5,8 +5,6 @@ import mono.factories.registries.registry.Registry;
 import mono.factories.registries.registry.StandardRegistry;
 import mono.factories.registries.storage.Storage2;
 
-import static mono.factories.mod.newloader.level.LoaderLevel.loaderLevels;
-
 public final class LoaderLevels {
     private LoaderLevels() {}
     public static final Registry<LoaderLevel> loaderLevels = new StandardRegistry<>();
