@@ -7,6 +7,7 @@ module core{
     requires versioncompare;
     requires jdk.compiler;
     requires zt.zip;
+    requires slf4j.api;
 
     opens mono.factories.core.inital;
     opens mono.factories.core.interfaces.engine;

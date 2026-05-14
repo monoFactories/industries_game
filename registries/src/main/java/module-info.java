@@ -10,4 +10,5 @@ module registries {
     exports mono.factories.utils.exceptions;
     exports mono.factories.registries.registry.protection;
     exports mono.factories.utils.io;
+    exports mono.factories.registries;
 }
