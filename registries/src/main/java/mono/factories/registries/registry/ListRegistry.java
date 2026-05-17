@@ -3,16 +3,16 @@ package mono.factories.registries.registry;
 import mono.factories.registries.id.Identifier;
 import mono.factories.registries.storage.Storage2;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 // Map<Identifier, List<T>>
-public interface ListRegistry<T> extends Iterable<Collection<T>> {
-    Collection<T> get(Identifier id);
+public interface ListRegistry<T> extends Iterable<List<T>> {
+    List<T> get(Identifier id);
 
-    Identifier register(Identifier id, Collection<T> item);
+    Identifier register(Identifier id, List<T> item);
 
-    Storage2<Identifier, Collection<T>> registerStorage(Identifier id, Collection<T> item);
+    Storage2<Identifier, List<T>> registerStorage(Identifier id, List<T> item);
 
     boolean contains(Identifier id);
 
@@ -22,5 +22,5 @@ public interface ListRegistry<T> extends Iterable<Collection<T>> {
 
     Set<Identifier> keys();
 
-    Collection<Collection<T>> values();
+    List<List<T>> values();
 }

@@ -10,21 +10,21 @@ import java.util.*;
 
 // Map<Identifier, List<T>>
 public class ListRegistryImpl <T> implements ListRegistry<T> {
-    private final Map<Identifier, Collection<T>> map = Object2ObjectMaps.synchronize(new Object2ObjectOpenHashMap<>());
+    private final Map<Identifier, List<T>> map = Object2ObjectMaps.synchronize(new Object2ObjectOpenHashMap<>());
 
     @Override
-    public Collection<T> get(Identifier id) {
+    public List<T> get(Identifier id) {
         return map.get(id);
     }
 
     @Override
-    public Identifier register(Identifier id, Collection<T> item) {
+    public Identifier register(Identifier id, List<T> item) {
         map.put(id, item);
         return id;
     }
 
     @Override
-    public Storage2<Identifier, Collection<T>> registerStorage(Identifier id, Collection<T> item) {
+    public Storage2<Identifier, List<T>> registerStorage(Identifier id, List<T> item) {
         map.put(id, item);
         return new Storage2<>(id, item);
     }
@@ -50,16 +50,16 @@ public class ListRegistryImpl <T> implements ListRegistry<T> {
     }
 
     @Override
-    public Collection<Collection<T>> values() {
+    public List<List<T>> values() {
         return map.values();
     }
 
     @Override
-    public Iterator<Collection<T>> iterator() {
+    public Iterator<List<T>> iterator() {
         return map.values().iterator();
     }
 
-    public static <T> Collection<T> getCollectionInstance() {
+    public static <T> List<T> getListInstance() {
         return new ObjectArrayList<>();
     }
 }

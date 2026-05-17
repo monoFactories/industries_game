@@ -9,6 +9,9 @@ public final class Identifier implements Cloneable { // constructors-public: (St
     public static final IdentifierJson JSON = new IdentifierJson();
     public static final String STANDARD_SPACE = "root_mod";
     public static final char STANDARD_SEPARATION_CHARACTER = ':';
+    public static final Gson g = new GsonBuilder()
+            .registerTypeAdapter(Identifier.class, JSON)
+            .create();
 
     private final String space;
     private final String name;
@@ -80,7 +83,7 @@ public final class Identifier implements Cloneable { // constructors-public: (St
 
     public static Identifier read(JsonElement je) {
         if (je != null) {
-
+            return g.fromJson(je, Identifier.class);
         }
         return null;
     }

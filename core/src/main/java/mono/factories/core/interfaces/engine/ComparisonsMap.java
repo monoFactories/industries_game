@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mono.factories.registries.id.Identifier;
 import mono.factories.registries.registry.ListRegistryImpl;
 
-import java.util.Collection;
+import java.util.List;
 
 class ComparisonsMap {
     final Object2ObjectMap<Identifier, Identifier> childToParent = new Object2ObjectOpenHashMap<>();
@@ -13,11 +13,11 @@ class ComparisonsMap {
     Identifier rootComponent;
 
     void addParentToChildrenEntry(UIEngine ui, Identifier parent, Identifier current) {
-        Collection<Identifier> collection = ui.comparisons.parentToChildren.get(parent);
-        if (collection == null) {
-            collection = ListRegistryImpl.getCollectionInstance();
-            ui.comparisons.parentToChildren.register(parent, collection);
+        List<Identifier> List = ui.comparisons.parentToChildren.get(parent);
+        if (List == null) {
+            List = ListRegistryImpl.getListInstance();
+            ui.comparisons.parentToChildren.register(parent, List);
         }
-        collection.add(current);
+        List.add(current);
     }
 }
