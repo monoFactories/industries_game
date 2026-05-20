@@ -8,6 +8,7 @@ module core{
     requires jdk.compiler;
     requires zt.zip;
     requires slf4j.api;
+    requires org.semver4j;
 
     opens mono.factories.core.inital;
     opens mono.factories.core.interfaces.engine;

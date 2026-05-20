@@ -14,7 +14,7 @@ public abstract class CodeSourceModLoader {
     public abstract void launch(Registry<Object> context);
 
     public static final Registry<Supplier<CodeSourceModLoader>> preparatoryModLoaders = new StandardRegistry<>();
-    public static final Storage2<Identifier, Supplier<CodeSourceModLoader>> STANDARD_PREPARATORY_LOADER = preparatoryModLoaders.registerStorage(new Identifier("standard_preparatory_loader"), simple());
+    public static final Storage2<Identifier, Supplier<CodeSourceModLoader>> STANDARD_MOD_LOADER = preparatoryModLoaders.registerStorage(new Identifier("standard_mod_loader"), simple());
 
     private static Supplier<CodeSourceModLoader> simple() {
         return SimpleCodeSourceModLoader::create;
