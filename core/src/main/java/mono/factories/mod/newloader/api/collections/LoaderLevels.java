@@ -1,5 +1,6 @@
-package mono.factories.mod.newloader.level;
+package mono.factories.mod.newloader.api.collections;
 
+import mono.factories.mod.newloader.level.LoaderLevel;
 import mono.factories.registries.id.Identifier;
 import mono.factories.registries.registry.Registry;
 import mono.factories.registries.registry.StandardRegistry;

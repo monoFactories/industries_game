@@ -9,25 +9,29 @@ import mono.factories.registries.registry.ListRegistryImpl;
 import java.util.List;
 import java.util.Objects;
 
-public class LoadingFunctionSuppliersStorage {
+public final class LoadingFunctionSuppliersStorage {
+    public static final Identifier START_STAGE = new Identifier("initial");
+
     public final ListRegistry<FunctionWithData> stageSuppliers = new ListRegistryImpl<>();
     public final List<Identifier> order = new ObjectArrayList<>();
-    public Identifier currentStage;
+    public Identifier currentStage = START_STAGE;
 
     public void add(FunctionWithData added) {
-        if (!stageSuppliers.contains(currentStage)) {
-            stageSuppliers.register(currentStage, new ObjectArrayList<>());
-        }
-        List<FunctionWithData> stageList = stageSuppliers.get(currentStage);
+        List<FunctionWithData> stageList = initStage(true);
         stageList.add(added);
     }
 
-    public void remove(FunctionWithData added) {
+    public void remove(FunctionWithData removed) {
+        List<FunctionWithData> stageList = initStage(false);
+        stageList.remove(removed);
+    }
+
+    private List<FunctionWithData> initStage(boolean needAddInOrder) {
         if (!stageSuppliers.contains(currentStage)) {
+            if (needAddInOrder) order.add(currentStage);
             stageSuppliers.register(currentStage, new ObjectArrayList<>());
         }
-        List<FunctionWithData> stageList = stageSuppliers.get(currentStage);
-        stageList.remove(added);
+        return stageSuppliers.get(currentStage);
     }
 
     public record FunctionWithData(Identifier function, JsonElement data) {

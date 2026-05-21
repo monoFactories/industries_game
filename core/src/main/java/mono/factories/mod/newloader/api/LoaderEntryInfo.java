@@ -7,8 +7,6 @@ import mono.factories.registries.id.Identifier;
 import mono.factories.registries.registry.Registry;
 import mono.factories.registries.registry.protection.PolicyBasedRegister;
 import org.semver4j.Semver;
-import org.semver4j.internal.VersionParser;
-import org.semver4j.range.Range;
 import org.semver4j.range.RangeList;
 import org.semver4j.range.RangeListFactory;
 
@@ -41,7 +39,11 @@ public class LoaderEntryInfo implements Identifiable {
         return dependencies;
     }
 
-    public LoaderEntryInfo parse(JsonElement json) {
+    public static LoaderEntryInfo parse(JsonElement json) {
+        return gson.fromJson(json, LoaderEntryInfo.class);
+    }
+
+    public static LoaderEntryInfo parse(String json) {
         return gson.fromJson(json, LoaderEntryInfo.class);
     }
 
