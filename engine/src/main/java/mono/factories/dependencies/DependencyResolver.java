@@ -1,13 +1,12 @@
 package mono.factories.dependencies;
 
 import mono.factories.registries.id.Identifier;
-import mono.factories.registries.registry.StandardRegistry;
+import mono.factories.registries.registry.DefaultRegistry;
 import mono.factories.registries.storage.Storage2;
 
 import java.util.*;
-import java.util.function.Consumer;
 
-public class DependencyResolver<T extends HasDependency> extends StandardRegistry<T> {
+public class DependencyResolver<T extends HasDependency> extends DefaultRegistry<T> {
     private volatile List<T> lastOut = null;
     private volatile boolean hasChange = true;
 

@@ -14,12 +14,15 @@ public interface CodeSource {
 
     /**
      * Получить список имён файлов и папок в указанной директории.
+     *
      * @param path путь к директории (пустая строка — корень)
      * @return коллекция имён элементов
      */
     Collection<String> list(String path);
+
     /**
      * Проверить существование файла или папки.
+     *
      * @param path полный путь к элементу
      * @return true, если элемент существует
      */
@@ -27,6 +30,7 @@ public interface CodeSource {
 
     /**
      * Проверить, является ли элемент директорией.
+     *
      * @param path полный путь
      * @return true для директории
      */
@@ -34,6 +38,7 @@ public interface CodeSource {
 
     /**
      * Проверить, является ли элемент файлом.
+     *
      * @param path полный путь
      * @return true для файла
      */
@@ -43,6 +48,7 @@ public interface CodeSource {
 
     /**
      * Открыть поток для чтения файла.
+     *
      * @param filePath путь к файлу
      * @return InputStream для чтения
      */
@@ -50,6 +56,7 @@ public interface CodeSource {
 
     /**
      * Прочитать содержимое файла как строку.
+     *
      * @param filePath путь к файлу
      * @return содержимое файла в виде строки
      */
@@ -57,6 +64,7 @@ public interface CodeSource {
 
     /**
      * Прочитать содержимое файла как массив байтов.
+     *
      * @param filePath путь к файлу
      * @return массив байтов файла
      */

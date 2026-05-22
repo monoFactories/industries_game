@@ -6,10 +6,13 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import mono.factories.registries.id.Identifier;
 import mono.factories.registries.storage.Storage2;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 // Map<Identifier, List<T>>
-public class ListRegistryImpl <T> implements ListRegistry<T> {
+public class ListRegistryImpl<T> implements ListRegistry<T> {
     private final Map<Identifier, List<T>> map = Object2ObjectMaps.synchronize(new Object2ObjectOpenHashMap<>());
 
     @Override

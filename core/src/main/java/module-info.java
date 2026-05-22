@@ -1,4 +1,4 @@
-module core{
+module core {
     requires registries;
     requires engine;
     requires languages;

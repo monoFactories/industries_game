@@ -12,11 +12,14 @@ public abstract class Process implements HasDependency {
         if (id == null) throw new NullPointerException("id is null");
         this.hasDependency = new CheckedHasDependency(dependencies, id);
     }
+
     public abstract void run(Engine engine);
+
     @Override
     public final Identifier id() {
         return hasDependency.id();
     }
+
     @Override
     public final Identifier[] dependencies() {
         return hasDependency.dependencies();

@@ -4,11 +4,11 @@ import mono.factories.engines.engine.Engine;
 import mono.factories.engines.process.Process;
 import mono.factories.engines.process.ProcessRegistries;
 import mono.factories.registries.actions.ActionDataHolder;
-import mono.factories.registries.actions.StandardActionDataHolder;
+import mono.factories.registries.actions.DefaultActionDataHolder;
 import mono.factories.utils.exceptions.StopForEachException;
 
 public class ConfigurableProcess extends Process {
-    private final ActionDataHolder<Engine> actionData = new StandardActionDataHolder<>(storage3 -> {
+    private final ActionDataHolder<Engine> actionData = new DefaultActionDataHolder<>(storage3 -> {
         ConfigurableProcessParameter cpp = ProcessRegistries.PROCESS_PARAMETERS.get(storage3.a());
         if (cpp != null) {
             boolean canRun = cpp.canRun(storage3.c(), storage3.b(), this);

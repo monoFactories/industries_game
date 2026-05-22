@@ -1,7 +1,7 @@
 package mono.factories.math.vec;
 
 public record Vec3I(int x, int y, int z) implements Coordinate3I, Vector {
-    public static final Vec3I ZERO = new Vec3I(0,0, 0), ONE = new Vec3I(1,1, 1);
+    public static final Vec3I ZERO = new Vec3I(0, 0, 0), ONE = new Vec3I(1, 1, 1);
 
     public Vec3I add(Vec3I v) {
         return new Vec3I(x + v.x, y + v.y, z + v.z);

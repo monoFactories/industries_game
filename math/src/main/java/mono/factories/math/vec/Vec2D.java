@@ -1,7 +1,7 @@
 package mono.factories.math.vec;
 
 public record Vec2D(double x, double y) implements Coordinate2D, Vector {
-    public static final Vec2D ZERO = new Vec2D(0,0), ONE = new Vec2D(1,1);
+    public static final Vec2D ZERO = new Vec2D(0, 0), ONE = new Vec2D(1, 1);
 
     public Vec2D add(Vec2D v) {
         return new Vec2D(x + v.x, y + v.y);
@@ -29,6 +29,6 @@ public record Vec2D(double x, double y) implements Coordinate2D, Vector {
 
     @Override
     public double[] getAsArray() {
-        return new double []{x, y};
+        return new double[]{x, y};
     }
 }

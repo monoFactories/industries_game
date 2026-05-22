@@ -1,13 +1,15 @@
 package mono.factories.registries.registry.protection;
 
 import mono.factories.registries.id.Identifier;
-import mono.factories.registries.registry.StandardRegistry;
+import mono.factories.registries.registry.DefaultRegistry;
 import mono.factories.registries.storage.Storage2;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
 import java.util.function.Supplier;
 
-public class PolicyBasedRegister<T> extends StandardRegistry<T> {
+public class PolicyBasedRegister<T> extends DefaultRegistry<T> {
     public static final Supplier<Boolean> allowAll = () -> true;
     private final Supplier<Boolean> checker;
 
@@ -62,8 +64,8 @@ public class PolicyBasedRegister<T> extends StandardRegistry<T> {
         return new PolicyBasedRegister<>(() -> {
             StackTraceElement[] trace = Thread.currentThread().getStackTrace(); // [..., allowedClass.xz(), ]
             if (trace.length > 3) {
-                  String className = trace[trace.length - 4].getClassName();
-                  return allowedClasses.contains(className);
+                String className = trace[trace.length - 4].getClassName();
+                return allowedClasses.contains(className);
             }
             return false;
         });

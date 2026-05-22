@@ -4,8 +4,8 @@ import com.google.gson.JsonElement;
 import mono.factories.dependencies.DependencyResolver;
 import mono.factories.dependencies.HasDependency;
 import mono.factories.mod.loader.ModClassLoader;
+import mono.factories.mod.loader.configs.DefaultModLoadConfig;
 import mono.factories.mod.loader.configs.ModLoadingConfig;
-import mono.factories.mod.loader.configs.StandardModLoadConfig;
 import mono.factories.registries.id.Identifier;
 import mono.factories.utils.io.GameFileSystem;
 import org.zeroturnaround.zip.ZipUtil;
@@ -98,18 +98,19 @@ public class FilteredFolderModProvider implements ModProvider {
 
     public static final class DefaultModLoaderEntry {
         private final File jarFile;
-        private final StandardModLoadConfig loadParameters;
+        private final DefaultModLoadConfig loadParameters;
 
         public DefaultModLoaderEntry(Path path, Identifier modId) {
             jarFile = path.toFile();
-            String confJson = new String(ZipUtil.unpackEntry(jarFile, StandardModLoadConfig.MOD_LOAD_CONFIG_FILENAME));
-            loadParameters = StandardModLoadConfig.parse(confJson);
+            String confJson = new String(ZipUtil.unpackEntry(jarFile, DefaultModLoadConfig.MOD_LOAD_CONFIG_FILENAME));
+            loadParameters = DefaultModLoadConfig.parse(confJson);
         }
 
         public void startLoading() throws MalformedURLException {
             ModClassLoader.classLoader.addURL(jarFile.toURI().toURL());
             List<String> entryPoints = loadParameters.getEntryPoints();
-            entryPoints.forEach(entryPoint -> {});
+            entryPoints.forEach(entryPoint -> {
+            });
         }
     }
 }

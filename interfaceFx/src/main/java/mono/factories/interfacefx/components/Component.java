@@ -14,6 +14,7 @@ public class Component implements Identifiable {
         this.id = id;
         this.pane = new AnchorPane();
     }
+
     public Component(Identifier id, AnchorPane pane1) {
         this.id = id;
         this.pane = pane1 == null ? new AnchorPane() : pane1;
@@ -28,9 +29,14 @@ public class Component implements Identifiable {
         return pane;
     }
 
-    public void update() {}
-    public void onAdd() {}
-    public void onRemove() {}
+    public void update() {
+    }
+
+    public void onAdd() {
+    }
+
+    public void onRemove() {
+    }
 
     @Override
     public boolean equals(Object object) {

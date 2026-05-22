@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 
 public class NodeParametersParser implements JsonDeserializer<NodeParameters>, JsonSerializer<NodeParameters> {
     public static final Gson parserGson;
+
     /*
     {
         "actions": {
@@ -39,7 +40,9 @@ public class NodeParametersParser implements JsonDeserializer<NodeParameters>, J
         JsonObject nodeParameterJson = new JsonObject();
         nodeParameterJson.add("actions", context.serialize(src.getActions(), NodeParameterActions.class));
         JsonObject data = new JsonObject();
-        src.getData().forEach((id, str) -> {data.add(id.toString(), new JsonPrimitive(str));});
+        src.getData().forEach((id, str) -> {
+            data.add(id.toString(), new JsonPrimitive(str));
+        });
         nodeParameterJson.add("data", data);
         return null;
     }

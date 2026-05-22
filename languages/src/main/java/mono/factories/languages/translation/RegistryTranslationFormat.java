@@ -16,9 +16,10 @@ public final class RegistryTranslationFormat { /* "id:registry.id.element",   "r
     }
 
     public static RegistryTranslationFormat parse(String str) {
-         String[] identifiers = str.split(String.valueOf(IDENTIFIERS_SPLITTER));
-         return new RegistryTranslationFormat(new Identifier(identifiers[0]), new Identifier(identifiers[1]));
+        String[] identifiers = str.split(String.valueOf(IDENTIFIERS_SPLITTER));
+        return new RegistryTranslationFormat(new Identifier(identifiers[0]), new Identifier(identifiers[1]));
     }
+
     public static Storage2<Boolean, RegistryTranslationFormat> tryParse(String str) {
         try {
             String[] identifiers = str.split(String.valueOf(IDENTIFIERS_SPLITTER));

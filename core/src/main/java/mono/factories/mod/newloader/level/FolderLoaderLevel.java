@@ -17,6 +17,7 @@ import java.nio.file.Path;
 public class FolderLoaderLevel implements LoaderLevel {
     private static final Logger logger = LogManager.getLogger(FolderLoaderLevel.class);
     private static final Gson deserializer;
+
     @Override
     public void startLoading(JsonElement data, LoadingProgress progress) {
         Config config = deserializer.fromJson(data, Config.class);
@@ -27,7 +28,7 @@ public class FolderLoaderLevel implements LoaderLevel {
                 CodeSourceProvider sourceProvider = CodeSourceFactory.factoryHolder.get().get().chooseProvider(path1);
                 try {
                     CodeSource codeSource = sourceProvider.create(path1);
-                    
+
                 } catch (Exception e) {
                     logger.warn("creation codeSource failed to path: {}", path1, e);
                 }
@@ -39,6 +40,7 @@ public class FolderLoaderLevel implements LoaderLevel {
 
     private record Config(String path) {
     }
+
     private static final class ConfigDeserializer implements JsonDeserializer<Config> {
         @Override
         public Config deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

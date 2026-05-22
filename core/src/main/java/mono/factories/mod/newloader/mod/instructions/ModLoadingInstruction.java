@@ -18,7 +18,8 @@ public class ModLoadingInstruction implements ModInitializationInstruction {
 
     }
 
-    public record LoadingInstructionConfig(Identifier modType, Identifier id, String version, Registry<JsonElement> description, String[] entryPoints, ) {
+    public record LoadingInstructionConfig(Identifier modType, Identifier id, String version,
+                                           Registry<JsonElement> description, String[] entryPoints,) {
 
     }
 

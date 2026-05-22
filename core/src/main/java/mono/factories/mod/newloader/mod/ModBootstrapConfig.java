@@ -5,7 +5,8 @@ import mono.factories.registries.id.Identifier;
 
 import java.util.Map;
 
-public record ModBootstrapConfig(Map<Identifier, JsonElement> variables, Map<Identifier, Map<Identifier, JsonElement>> stages) {
+public record ModBootstrapConfig(Map<Identifier, JsonElement> variables,
+                                 Map<Identifier, Map<Identifier, JsonElement>> stages) {
 
 }
 /*

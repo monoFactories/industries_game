@@ -3,7 +3,7 @@ package mono.factories.math.vec;
 import java.util.function.Function;
 
 public class VectorCaster {
-    public static final  Function<Double, Integer> STANDARD_DOUBLE_INT_CASTER = (in) -> (int) in.doubleValue();
+    public static final Function<Double, Integer> Default_DOUBLE_INT_CASTER = (in) -> (int) in.doubleValue();
 
     private final Function<Double, Integer> castInt;
 

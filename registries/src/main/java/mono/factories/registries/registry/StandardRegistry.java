@@ -11,7 +11,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 // Map<Identifier, T>
-public class StandardRegistry<T> implements Registry<T> {
+public class DefaultRegistry<T> implements Registry<T> {
     private final Object2ObjectMap<Identifier, T> map = Object2ObjectMaps.synchronize(new Object2ObjectOpenHashMap<>());
 
     @Override

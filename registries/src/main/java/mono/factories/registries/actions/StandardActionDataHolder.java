@@ -1,19 +1,20 @@
 package mono.factories.registries.actions;
 
 import mono.factories.registries.id.Identifier;
+import mono.factories.registries.registry.DefaultRegistry;
 import mono.factories.registries.registry.Registry;
-import mono.factories.registries.registry.StandardRegistry;
 import mono.factories.registries.storage.Storage3;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Consumer;
 
-public class StandardActionDataHolder<TransmittedObject> implements ActionDataHolder<TransmittedObject> {
+public class DefaultActionDataHolder<TransmittedObject> implements ActionDataHolder<TransmittedObject> {
     private final Set<Identifier> actions;
     private final Registry<String> data;
     private final Consumer<Storage3<Identifier, ActionDataHolder<TransmittedObject>, TransmittedObject>> runActionFun;
 
-    public StandardActionDataHolder(Set<Identifier> actions, Registry<String> data, Consumer<Storage3<Identifier, ActionDataHolder<TransmittedObject>, TransmittedObject>> runActionFun) {
+    public DefaultActionDataHolder(Set<Identifier> actions, Registry<String> data, Consumer<Storage3<Identifier, ActionDataHolder<TransmittedObject>, TransmittedObject>> runActionFun) {
         if (actions == null || data == null || runActionFun == null)
             throw new NullPointerException("one of the parameters is null");
         this.actions = actions;
@@ -21,8 +22,8 @@ public class StandardActionDataHolder<TransmittedObject> implements ActionDataHo
         this.runActionFun = runActionFun;
     }
 
-    public StandardActionDataHolder(Consumer<Storage3<Identifier, ActionDataHolder<TransmittedObject>, TransmittedObject>> runActionFun) {
-        this(new HashSet<>(), new StandardRegistry<>(), runActionFun);
+    public DefaultActionDataHolder(Consumer<Storage3<Identifier, ActionDataHolder<TransmittedObject>, TransmittedObject>> runActionFun) {
+        this(new HashSet<>(), new DefaultRegistry<>(), runActionFun);
     }
 
     @Override

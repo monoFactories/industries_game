@@ -3,11 +3,8 @@ package mono.factories.mod.newloader.config;
 import com.google.gson.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import mono.factories.registries.id.Identifier;
-import mono.factories.registries.registry.Registry;
-import mono.factories.registries.registry.StandardRegistry;
 import mono.factories.registries.storage.Storage2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoadingFunctionSuppliersConfig {

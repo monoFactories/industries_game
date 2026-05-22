@@ -1,8 +1,5 @@
 package mono.factories.events;
 
-import mono.factories.registries.id.Identifiable;
-import mono.factories.registries.id.Identifier;
-
 public class Event<T> {
     private final T t;
 

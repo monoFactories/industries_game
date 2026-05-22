@@ -44,7 +44,7 @@ public class MultiValueRegistryImpl<T> implements MultiValueRegistry<T> {
 
     @Override
     public Registry<T> getRegistryImpl() {
-        return new StandardRegistry<>();
+        return new DefaultRegistry<>();
     }
 
     @Override

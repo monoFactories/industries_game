@@ -7,10 +7,10 @@ import mono.factories.mod.newloader.mod.instructions.ModInitializationInstructio
 import mono.factories.mod.newloader.mod.instructions.ModInitializationInstructions;
 import mono.factories.mod.newloader.mod.stages.InstructionStage;
 import mono.factories.registries.id.Identifier;
+import mono.factories.registries.registry.DefaultRegistry;
 import mono.factories.registries.registry.ListRegistry;
 import mono.factories.registries.registry.ListRegistryImpl;
 import mono.factories.registries.registry.Registry;
-import mono.factories.registries.registry.StandardRegistry;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class DefaultModInitializedData {
     }
 
     public static DefaultModInitializedData create(ModBootstrapConfig config) {
-        Registry<JsonElement> variables = new StandardRegistry<>();
+        Registry<JsonElement> variables = new DefaultRegistry<>();
         ListRegistry<Identifier> stagesInstructions = new ListRegistryImpl<>();
         config.stages().forEach((stageIdentifier, identifierJsonElementMap) -> identifierJsonElementMap.forEach((identifier, element) -> {
             if (!stagesInstructions.contains(stageIdentifier)) {

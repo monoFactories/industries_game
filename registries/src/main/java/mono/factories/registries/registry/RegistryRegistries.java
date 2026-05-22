@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 public class RegistryRegistries {
     public static final Logger logger = LogManager.getLogger(RegistryRegistries.class);
 
-    public static final Registry<Registry<?>> root = new StandardRegistry<>();
+    public static final Registry<Registry<?>> root = new DefaultRegistry<>();
 
     public static <T> Registry<T> register(Registry<T> registry, Identifier id) {
         try {

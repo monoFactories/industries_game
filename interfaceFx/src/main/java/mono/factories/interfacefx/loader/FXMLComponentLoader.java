@@ -21,31 +21,32 @@ import java.util.function.Function;
 
 public class FXMLComponentLoader {
     private static final Logger logger = LogManager.getLogger(FXMLComponentLoader.class);
+
     /**
      * Parses FXML markup from an InputStream, loads it into an AnchorPane, and recursively processes node parameters stored in userData as JSON strings.
-     *
+     * <p>
      * The method performs the following steps:
      * 1. Validates the input (checks that fxmlInput is not null).
      * 2. Uses FXMLLoader to load the FXML markup from the provided InputStream into an AnchorPane.
      * 3. Creates a recursive processor (Consumer<Node>) to traverse the node tree and process each node:
-     *    - If the node is a Parent (container), the method recursively processes all its child nodes.
-     *    - If the node has userData in the form of a String, the method attempts to parse this string as JSON using Gson and convert it into a NodeParameters object.
-     *    - The parsed NodeParameters object replaces the original String in the node's userData.
-     *    - If JSON parsing fails, a warning is logged, but the method continues processing other nodes.
+     * - If the node is a Parent (container), the method recursively processes all its child nodes.
+     * - If the node has userData in the form of a String, the method attempts to parse this string as JSON using Gson and convert it into a NodeParameters object.
+     * - The parsed NodeParameters object replaces the original String in the node's userData.
+     * - If JSON parsing fails, a warning is logged, but the method continues processing other nodes.
      * 4. Applies the processor to the root AnchorPane, triggering the recursive traversal and parameter parsing.
      * 5. Returns the processed AnchorPane.
-     *
+     * <p>
      * Logging is used at multiple levels to track the process:
      * - INFO: marks key stages (start/end of FXML loading, start/end of recursive traversal).
      * - DEBUG: provides details about each node (type, number of children, userData processing status).
      * - WARN: logs JSON parsing errors for individual nodes.
      * - ERROR: logs critical errors (IO exceptions, unexpected errors during parsing).
-     *
+     * <p>
      * Error handling:
      * - Throws IOException if FXML loading from InputStream fails.
      * - Catches and logs other exceptions during parsing.
      * - Returns null if an error occurs (with an ERROR log message).
-     *
+     * <p>
      * Use case:
      * This method is useful for applications that store node configuration (e.g., styling, behavior parameters) in userData as JSON and need to parse and apply these parameters after FXML loading.
      *
@@ -94,6 +95,7 @@ public class FXMLComponentLoader {
         logger.error("Returning null due to parsing error.");
         return null; // or throw new RuntimeException("Parsing failed", e) — depending on the application logic
     }
+
     private static Component load(InputStream is, Identifier id, Function<Storage2<Identifier, AnchorPane>, Component> createComponentFunction) {
         AnchorPane ap = parse(is);
         if (ap != null) {

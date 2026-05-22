@@ -4,6 +4,7 @@ import mono.factories.registries.id.Identifier;
 import mono.factories.registries.registry.Registry;
 
 import java.util.Set;
+
 // List<Identifier>; Map<Identifier, String>
 public interface ActionDataHolder<Transmitted> {
     Set<Identifier> actionsID();

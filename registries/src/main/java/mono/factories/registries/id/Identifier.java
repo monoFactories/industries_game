@@ -7,8 +7,8 @@ import java.lang.reflect.Type;
 public final class Identifier implements Cloneable { // constructors-public: (String), (String, String)
     public static final Identifier[] EMPTY_ARRAY = new Identifier[0];
     public static final IdentifierJson JSON = new IdentifierJson();
-    public static final String STANDARD_SPACE = "root_mod";
-    public static final char STANDARD_SEPARATION_CHARACTER = ':';
+    public static final String Default_SPACE = "root_mod";
+    public static final char Default_SEPARATION_CHARACTER = ':';
     public static final Gson g = new GsonBuilder()
             .registerTypeAdapter(Identifier.class, JSON)
             .create();
@@ -26,12 +26,12 @@ public final class Identifier implements Cloneable { // constructors-public: (St
         this(parts[0], parts[1]);
     }
 
-    private Identifier(String id, char separator, String standardSpace) {
-        this(parser(id, separator, standardSpace));
+    private Identifier(String id, char separator, String DefaultSpace) {
+        this(parser(id, separator, DefaultSpace));
     }
 
     public Identifier(String id) {
-        this(id, STANDARD_SEPARATION_CHARACTER, STANDARD_SPACE);
+        this(id, Default_SEPARATION_CHARACTER, Default_SPACE);
     }
 
     public String getName() {
@@ -62,7 +62,7 @@ public final class Identifier implements Cloneable { // constructors-public: (St
 
     @Override
     public String toString() {
-        return space + STANDARD_SEPARATION_CHARACTER + name;
+        return space + Default_SEPARATION_CHARACTER + name;
     }
 
     private static String[] parser(String line, char separator, String space) {
@@ -77,8 +77,8 @@ public final class Identifier implements Cloneable { // constructors-public: (St
         return complete;
     }
 
-    public static Identifier create(String id, String customStandardSpace) {
-        return new Identifier(id, STANDARD_SEPARATION_CHARACTER, customStandardSpace);
+    public static Identifier create(String id, String customDefaultSpace) {
+        return new Identifier(id, Default_SEPARATION_CHARACTER, customDefaultSpace);
     }
 
     public static Identifier read(JsonElement je) {
@@ -87,6 +87,7 @@ public final class Identifier implements Cloneable { // constructors-public: (St
         }
         return null;
     }
+
     public final static class IdentifierJson implements JsonSerializer<Identifier>, JsonDeserializer<Identifier> {
 
         @Override
@@ -111,7 +112,7 @@ public final class Identifier implements Cloneable { // constructors-public: (St
 
         @Override
         public JsonElement serialize(Identifier identifier, Type type, JsonSerializationContext jsonSerializationContext) {
-            return new JsonPrimitive(identifier.space + STANDARD_SEPARATION_CHARACTER + identifier.name);
+            return new JsonPrimitive(identifier.space + Default_SEPARATION_CHARACTER + identifier.name);
         }
     }
 }

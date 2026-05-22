@@ -3,12 +3,12 @@ package mono.factories.engines.process;
 import mono.factories.registries.id.Identifiable;
 import mono.factories.registries.id.Identifier;
 
-public class StandardProcessHolder implements Identifiable {
+public class DefaultProcessHolder implements Identifiable {
     private final Process process;
     private long lastMillisTimeRunning;
 
 
-    public StandardProcessHolder(Process process) {
+    public DefaultProcessHolder(Process process) {
         if (process == null) throw new NullPointerException("process is null");
         this.process = process;
         lastMillisTimeRunning = System.currentTimeMillis();

@@ -1,11 +1,7 @@
 package mono.factories.languages.language;
 
-import mono.factories.registries.id.Identifier;
+import mono.factories.registries.registry.DefaultRegistry;
 import mono.factories.registries.registry.Registry;
-import mono.factories.registries.registry.RegistryRegistries;
-import mono.factories.registries.registry.StandardRegistry;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class LanguageRegistries {
     // opcode -> name; en_en = English;
@@ -16,5 +12,5 @@ public class LanguageRegistries {
 
     //see Languages class
 
-    public static final Registry<String> LANG_OPCODES = new StandardRegistry<>();
+    public static final Registry<String> LANG_OPCODES = new DefaultRegistry<>();
 }

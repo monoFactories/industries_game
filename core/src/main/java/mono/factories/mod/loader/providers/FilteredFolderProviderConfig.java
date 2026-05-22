@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class FilteredFolderProviderConfig {
     private static final Gson GSON = new GsonBuilder().registerTypeAdapter(FilteredFolderProviderConfig.class, new Deserializer()).create();
@@ -50,7 +49,8 @@ public class FilteredFolderProviderConfig {
         }
     }
 
-    public record FilterEntry(BiFunction<Path, JsonElement, Boolean> function, JsonElement element) implements Function<Path, Boolean> {
+    public record FilterEntry(BiFunction<Path, JsonElement, Boolean> function,
+                              JsonElement element) implements Function<Path, Boolean> {
 
         @Override
         public Boolean apply(Path path) {
