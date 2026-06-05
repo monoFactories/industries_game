@@ -15,6 +15,7 @@ public record DependencyEntry(Identifier path, RangeList rangeVersion) {
     }
 
     public static Registry<DependencyEntry> createMap(JsonElement e) {
+        if (e == null || e.isJsonNull()) return new DefaultRegistry<>();
         JsonObject o = e.getAsJsonObject();
         Registry<DependencyEntry> registry = new DefaultRegistry<>();
         o.asMap().forEach((str, je) -> registry.register(new Identifier(str), create(je)));
